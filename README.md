@@ -19,7 +19,7 @@ For running the project you will need:
 * start
 
 I tried to show a little bit of everything that I know. <br />
-I wish I had more time to do more. <br />
+I wish I had time to do more. <br />
 Hope you enjoy it and feel free to contact me about anything! <br />
 
 Thank you :wink:
