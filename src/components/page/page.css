@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -22,6 +25,16 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-Container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 50px;
+  background-color: #e0e2e7;
 }
 
 .App-link {
