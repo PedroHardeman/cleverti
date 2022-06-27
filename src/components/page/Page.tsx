@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Header } from "../header/Header";
 import { List } from "../list/List";
 import { CircularProgress } from "@mui/material";
+import { StyledDiv, StyledContainer } from "./styles";
 
 import { getMovies } from "../../services/pageServices";
-import "./page.css";
 
 interface IResponse {
   coverImage: string,
@@ -39,7 +39,7 @@ function Page() {
   };
 
   return (
-    <div className="App">
+    <StyledDiv>
       <Header
         searchValue={searchValue}
         handleSearch={(value) => {
@@ -52,7 +52,7 @@ function Page() {
         }}
       />
 
-      <div className="App-Container">
+      <StyledContainer>
         {loading
           ? <CircularProgress />
           : <List
@@ -61,9 +61,9 @@ function Page() {
             categoryValue={categoryValue}
           />
         }
-      </div>
+      </StyledContainer>
 
-    </div>
+    </StyledDiv>
   );
 }
 

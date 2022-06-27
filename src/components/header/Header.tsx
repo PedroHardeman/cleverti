@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "../../assets/cleverti-logo.png";
-
-import "./header.css";
+import { Input } from "../input/Input";
+import { Select } from "../select/Select";
+import { StyledDiv, StyledLogo, StyledContainer } from "./styles";
 
 interface ISearch {
   searchValue: string,
@@ -11,23 +12,22 @@ interface ISearch {
 
 export const Header = ({ searchValue, handleSearch, handleCategory }: ISearch) => {
   return (
-    <div className="wrapper">
-      <img src={logo} alt="header-logo" className="logo" />
-      <div className="search-container">
-        <input
+    <StyledDiv>
+      <StyledLogo src={logo} alt="header-logo" />
+      <StyledContainer>
+        <Input
           type="text"
           name="search"
           placeholder="Search..."
-          className="search"
           value={searchValue}
           onChange={(e) => handleSearch(e.target.value)}
         />
-        <select className="select" onChange={(e) => handleCategory(e.target.value)}>
-          <option value="title">title</option>
-          <option value="director">director</option>
-          <option value="year">year</option>
-        </select>
-      </div>
-    </div>
+        <Select
+          name="select"
+          value="title"
+          onChange={(e) => handleCategory(e.target.value)}
+        />
+      </StyledContainer>
+    </StyledDiv>
   )
 };

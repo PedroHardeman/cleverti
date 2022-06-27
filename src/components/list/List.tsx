@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
-  Card,
-  Grid,
   CardMedia,
-  CardContent,
   Pagination,
-  Dialog,
-  DialogTitle,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Modal } from "../modal/Modal";
 import { Text } from "../text/Text";
 
-import "./list.css";
+import { StyledGrid, StyledGridWrapper, StyledCard, StyledCardContent, StyledEmpty } from "./styles";
 
 interface IResponse {
   coverImage: string,
@@ -56,7 +52,7 @@ export const List = ({ wholeList, searchValue, categoryValue }: ListProps) => {
         .slice(0, 10)
       );
 
-    handlePagination(undefined as unknown as React.ChangeEvent<unknown>, 1)
+    handlePagination(undefined as unknown as React.ChangeEvent<unknown>, 1);
   };
 
   const handlePagination = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -65,7 +61,7 @@ export const List = ({ wholeList, searchValue, categoryValue }: ListProps) => {
         // @ts-ignore: Unreachable code error
         .filter(movie => movie.year === parseInt(searchValue))
         .length
-      )
+      );
 
       setShowingList(wholeList
         // @ts-ignore: Unreachable code error
@@ -77,7 +73,7 @@ export const List = ({ wholeList, searchValue, categoryValue }: ListProps) => {
         // @ts-ignore: Unreachable code error
         .filter(movie => movie[categoryValue].toUpperCase().includes(searchValue.toUpperCase()))
         .length
-      )
+      );
 
       setShowingList(wholeList
         // @ts-ignore: Unreachable code error
@@ -95,23 +91,23 @@ export const List = ({ wholeList, searchValue, categoryValue }: ListProps) => {
   return (
     showingList.length > 0
       ? <>
-        <Grid container className="grid-container">
+        <StyledGrid container>
           {showingList.map(movie => (
-            <Grid item xs={2} className="grid-wrapper" onClick={() => handleClickOpen(movie)}>
-              <Card className="card-wrapper">
+            <StyledGridWrapper item xs={2} onClick={() => handleClickOpen(movie)}>
+              <StyledCard>
                 <CardMedia
                   component="img"
                   image={movie.coverImage}
                   alt={movie.id}
                 />
-              </Card>
-              <CardContent className="card-content">
+              </StyledCard>
+              <StyledCardContent>
                 {movie.title}
                 <ExpandMoreIcon onClick={() => handleClickOpen(movie)} />
-              </CardContent>
-            </Grid>
+              </StyledCardContent>
+            </StyledGridWrapper>
           ))}
-        </Grid>
+        </StyledGrid>
         <Pagination
           count={(pageController / 10) > 0
             ? Math.ceil(pageController / 10)
@@ -120,28 +116,14 @@ export const List = ({ wholeList, searchValue, categoryValue }: ListProps) => {
           onChange={handlePagination}
         />
 
-
-        <Dialog
+        <Modal
           open={open}
           onClose={() => setOpen(false)}
-        >
-          <DialogTitle><Text label="About the movie" fontSize="small" /></DialogTitle>
-          <Card className="card-wrapper">
-            <CardMedia
-              component="img"
-              image={movieSelected?.coverImage}
-              alt={movieSelected?.id}
-            />
-          </Card>
-          <CardContent>
-            <Text label={`${movieSelected?.title}, ${movieSelected?.year}`} fontSize="large" color="mineShaft" />
-            <Text label={movieSelected?.description} fontSize="small" color="mineShaft" />
-            <Text label={`Directed by ${movieSelected?.director}`} fontSize="medium" color="mineShaft" />
-          </CardContent>
-        </Dialog>
+          movieSelected={movieSelected}
+        />
       </>
-      : <div className="empty-container">
-        <Text color="havelockBlue" label="No results found!" fontSize="large" />
-      </div>
+      : <StyledEmpty>
+        <Text color="havelockBlue" label="No movies found!" fontSize="large" />
+      </StyledEmpty>
   )
 };
