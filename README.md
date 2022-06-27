@@ -18,7 +18,8 @@ For running the project you will need:
 
 - clone
 - install
-- start
+- make sure the json-server is working
+- start the project
 
 I tried to show a little bit of everything that I know. <br />
 1 example of unit testing - if the endpoint is returning at least 1 movie <br />
